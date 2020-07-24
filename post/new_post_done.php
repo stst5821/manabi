@@ -1,4 +1,9 @@
 <?php
+session_start();
+session_regenerate_id(true);
+?>
+
+<?php
 require_once('../header.php');
 ?>
 
@@ -9,8 +14,11 @@ try {
 require_once('../common.php');
 
 // $_POSTに入っている本文をsanitize関数で処理。スクリプトが書かれていたらただの文字に変換して$contentに代入
-$post = sanitize($_POST);
-$content = $post["content"];
+    $post = sanitize($_POST);
+    $content = $post["content"];
+    // ログイン成功後、$_SESSIONで保持しておいたmemberテーブルのuser_idとnameを取り出して変数に入れる
+    $user_id = $_SESSION['user_id'];
+    $user_name = $_SESSION['name'];
 
     $dsn = 'mysql:dbname=manabi;host=localhost;charset=utf8';
     $user = 'root';
@@ -42,8 +50,8 @@ catch(Exception $e)
 </p>
 <br>
 
-<p><a href="post_list.php">投稿管理画面に戻る</a></p>
-<p><a href="index.php">トップへ戻る</a></p>
+<p><a href="../main/post_list.php">投稿管理画面に戻る</a></p>
+<p><a href="../main/index.php">トップへ戻る</a></p>
 
 <?php
 require_once('../footer.php');

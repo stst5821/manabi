@@ -14,7 +14,7 @@ $post = sanitize($_POST);
 
 $name = $post['name'];
 $email = $post['email'];
-$password = $post['password'];
+$pass = $post['pass'];
 
 $dsn = 'mysql:dbname=manabi;host=localhost;charset=utf8';
 $user = 'root';
@@ -26,7 +26,7 @@ $sql = 'INSERT INTO member(name,email,password) VALUES(?,?,?)';
 $stmt = $dbh->prepare($sql);
 $data[] = $name;
 $data[] = $email;
-$data[] = $password;
+$data[] = $pass;
 $stmt->execute($data);
 
 $dbn = null;
@@ -46,7 +46,7 @@ catch(Exception $e)
 
 
 <br><br>
-<a href="post_list.php">トップへ戻る</a>
+<a href="../main/post_list.php">トップへ戻る</a>
 
 <?php
 require_once('../footer.php');

@@ -7,3 +7,14 @@
 .email {
     width: 300px;
 }
+
+.header_wrap {
+    display: flex;
+    justify-content: space-between;
+    .login_status {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+    }
+}

@@ -7,8 +7,8 @@ session_regenerate_id(true);
 require_once('../header.php');
 ?>
 
-<h2>新規投稿</h2>
-<form method="post" action="new_post_done.php">
+<h2>投稿削除</h2>
+<form method="post" action="delete_post_done.php">
     <textarea class="test" name="content" placeholder="まなびの記録を残しましょう！" required="required"></textarea>
     <br><br>
     <input type="submit" value="投稿する">

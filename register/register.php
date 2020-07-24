@@ -14,16 +14,18 @@ require_once('../header.php');
     <br><br>
     パスワード
     <br>
-    <input type="password" name="password" required="required">
+    <input type="password" name="pass" required="required">
     <br><br>
     パスワードをもう一度入力してください。
     <br>
     <input type="password" name="password2" required="required">
     <br>
     <br>
-    <input type="submit" value="投稿する">
+    <input type="submit" value="登録する">
 
 </form>
+<br><br>
+<a href="../main/index.php">トップへ戻る</a>
 <br><br>
 <a href="post_list.php">投稿管理画面へ戻る</a>
 
