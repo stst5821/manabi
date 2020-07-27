@@ -11,6 +11,7 @@ require_once('../header.php');
 <br><br>
 <a href="index.php">トップへ戻る</a>
 <br><br>
+<a href="../post/new_post.php">新規投稿</a>
 
 <?php
 
@@ -45,6 +46,11 @@ $sql = "SELECT * FROM member LEFT JOIN post ON member.user_id = post.user_id WHE
 $stmt = $dbh->prepare($sql);
 $stmt->execute();
 
+print '<form method="post" action="../post/post_branch.php">';
+print '<input type="submit" name="edit" value="修正">';
+print '<input type="submit" name="delete" value="削除">';
+
+
 print '<hr>';
 print '<br>';
 
@@ -53,7 +59,9 @@ while($rec = $stmt->fetch(PDO::FETCH_ASSOC))
     $content = $rec['post_content'];
     $name = $rec['name'];
     $created = $rec['created_at'];
+    $postId = $rec['post_id'];
     
+    print "<input type='radio' name='post_id' value='$postId'>";
     print $name;
     print ' ';
     print $created;
@@ -64,6 +72,8 @@ while($rec = $stmt->fetch(PDO::FETCH_ASSOC))
     print '<br>';
 }
 
+    $dbh = null;
+
 }
 catch(Exception $e) 
 {
@@ -71,12 +81,9 @@ catch(Exception $e)
     exit();
 }
 
+print '</form>';
+
 ?>
-
-<a href="../post/new_post.php">新規投稿</a>
-<a href="../post/delete_post.php">投稿削除</a>
-<a href="../post/edit_post.php">投稿修正</a>
-
 
 <?php
 require_once('../footer.php');
