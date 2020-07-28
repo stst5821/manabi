@@ -42,6 +42,7 @@ else
     $_SESSION['login'] = 1;
     $_SESSION['name'] = $rec['name'];
     $_SESSION['user_id'] = $rec['user_id'];
+    // header('Location:../main/index.php');
     header('Location:../main/index.php');
     exit();
 }
