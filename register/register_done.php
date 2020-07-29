@@ -7,7 +7,6 @@ require_once('../header.php');
 try 
 {
 
-print_r($_POST);
 
 require_once('../common.php');
 $post = sanitize($_POST);

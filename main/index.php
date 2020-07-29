@@ -16,15 +16,14 @@ require_once('../header.php');
 アカウントが無い方は、<a href="../register/register.php">こちら</a>から登録してください。
 <br><br>
 
+<hr>
+<br>
+
 <?php endif; ?>
 
 <?php
-require_once('../header.php');
-?>
-
-<?php
     //一ページに表示する記事の数をmax_viewに定数として定義
-    define('max_view',4);
+    define('max_view',6);
 
     try{
         $pdo = new PDO('mysql:dbname=manabi;host=localhost;charset=utf8','root','1234');
@@ -98,10 +97,8 @@ require_once('../header.php');
             }
         ?>
 
-<?php
-require_once('../footer.php');
-?>
-
+<br>
+<hr>
 
 <?php
 require_once('../footer.php');

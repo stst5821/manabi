@@ -2,8 +2,8 @@
 require_once('../header.php');
 ?>
 
-ログイン
-<br><br>
+<h2>ログイン</h2>
+
 <form method="post" action="login_check.php">
     メールアドレス
     <br>

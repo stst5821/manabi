@@ -8,9 +8,6 @@ require_once('../common.php');
 
 $post = sanitize($_POST);
 
-print_r($post);
-print '<br>';
-
 $name = $post['name'];
 $email = $post['email'];
 $pass = $post['pass'];

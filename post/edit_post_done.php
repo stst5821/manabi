@@ -9,8 +9,12 @@ require_once('../header.php');
 
 <?php
 
-$post_code = $_POST['postId'];
-$content = $_POST['content'];
+require_once('../common.php');
+
+$post = sanitize($_POST);
+
+$post_code = $post['postId'];
+$content = $post['content'];
 
 $dsn = 'mysql:dbname=manabi;host=localhost;charset=utf8';
 $user = 'root';
