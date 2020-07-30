@@ -1,9 +1,7 @@
 <?php
 session_start();
 session_regenerate_id(true);
-?>
 
-<?php
 require_once('../header.php');
 ?>
 
@@ -39,36 +37,44 @@ require_once('../header.php');
     $stmt->execute();
 
     //必要なページ数を求める
+    // prepareでSQLを準備し、executeで実行する
+    // COUNT(*)にすると、格納されている値がNULLかどうか関係なくカウントする。
+    // AS count で、取得したレコード数にcountというカラム名をつけている。
     $count = $pdo->prepare('SELECT COUNT(*) AS count FROM post');
     $count->execute();
+    // PDO::FETCH_ASSOCは、カラム名を添え字にした配列を返す。この為に、43行目のSELECT文においてAS countと書いて、取得したレコード数にcountというカラム名を付けた。
     $total_count = $count->fetch(PDO::FETCH_ASSOC);
-    $pages = ceil($total_count['count'] / max_view);
+    // ページ数を決める。記事数 / 最大表示数 ceil()は計算した結果の数字を小数点以下で切り上げる関数
+    $pages = ceil($total_count['count'] / max_view); 
 
     //現在いるページのページ番号を取得
-    if(!isset($_GET['page_id'])){ 
-        $now = 1;
-    }else{
+    // $_GET['page_id']に値が入っていれば中身を$nowに代入。入っていなければ$nowに1を代入する。
+    if(isset($_GET['page_id'])){ 
         $now = $_GET['page_id'];
+    }else{
+        $now = 1;
     }
 
-//表示する記事を取得するSQLを準備
+    //表示する記事を取得するSQLを準備
+    // LIMIT 第一引数, 第二引数 は、第一引数の行番号から、第二引数の値分、レコードを取得する。この場合、:startから:max分、レコードを取得するということ。
     $select = $pdo->prepare("SELECT * FROM member LEFT JOIN post ON member.user_id = post.user_id ORDER BY created_at DESC LIMIT :start,:max ");
 
     if ($now == 1){
-//1ページ目の処理
+    //1ページ目の処理
+    // $now-1 なので0番目のレコードからmaxviewの値まで取得する
         $select->bindValue(":start",$now -1,PDO::PARAM_INT);
         $select->bindValue(":max",max_view,PDO::PARAM_INT);
     } else {
-//1ページ目以外の処理
+    //1ページ目以外の処理
+    // $nowが2とすると、$now-1で1*maxviewから、maxview分のレコードを取得する
         $select->bindValue(":start",($now -1 ) * max_view,PDO::PARAM_INT);
         $select->bindValue(":max",max_view,PDO::PARAM_INT);
     }
-//実行し結果を取り出しておく
-    
+    //実行
     $select->execute(); 
     
     while($data = $select->fetch(PDO::FETCH_ASSOC))
-{   
+    {   
     $content = $data['post_content'];
     $name = $data['name'];
     $created = $data['created_at'];
@@ -82,20 +88,17 @@ require_once('../header.php');
     print '<br><br>';
     print '<hr>';
     print '<br>';
-}
+    }
 
+    //ページネーションを表示
+    for ( $n = 1; $n <= $pages; $n ++){
+        if ( $n == $now ){
+            echo "<span style='padding: 5px;'>$now</span>";
+        }else{
+            echo "<a href='index.php?page_id=$n' style='padding: 5px;'>$n</a>";
+        }
+    }
 ?>
-
-<?php
-            //ページネーションを表示
-            for ( $n = 1; $n <= $pages; $n ++){
-                if ( $n == $now ){
-                    echo "<span style='padding: 5px;'>$now</span>";
-                }else{
-                    echo "<a href='index.php?page_id=$n' style='padding: 5px;'>$n</a>";
-                }
-            }
-        ?>
 
 <br>
 <hr>
