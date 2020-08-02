@@ -31,5 +31,5 @@
             </div>
         </div>
     </header>
-    <!DOCTYPE html>
-    <html lang="ja">
+
+    <hr>

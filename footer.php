@@ -1,4 +1,5 @@
 <footer>
+    <hr>
     <p>
         twitter:toshow0083
     </p>

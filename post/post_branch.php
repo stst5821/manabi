@@ -4,9 +4,9 @@
 
 // 追加
 
-if(isset($_POST['add']) == true) {
+if(isset($_POST['new']) == true) {
     
-    header('location:add/staff_add.php');
+    header('location:new_post.php');
     exit();
     
 }
@@ -17,8 +17,7 @@ if(isset($_POST['edit']) == true) {
 
     if(isset($_POST['post_id'])==false)
     {
-        var_dump($_POST['post_id']);
-        // header('location:staff_ng.php');
+        header('location:post_ng.php');
         exit();
     }
     $post_code = $_POST['post_id'];
@@ -32,7 +31,7 @@ if(isset($_POST['delete']) == true) {
 
     if(isset($_POST['post_id'])==false)
     {   
-        header('location:staff_ng.php');
+        header('location:post_ng.php');
         exit();
     }
     $post_code = $_POST['post_id'];
